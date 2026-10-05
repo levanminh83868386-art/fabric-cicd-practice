@@ -25,12 +25,14 @@ jobs:
           --user ${{ secrets.FABRIC_CLIENT_ID }} \
           --password ${{ secrets.FABRIC_CLIENT_SECRET }} \
           --tenant ${{ secrets.FABRIC_TENANT_ID }}
+          
+         fab mkdir "Minh-FabricCICD-TEST.Workspace" --capacityName ${{ secrets.FABRIC_CAPACITY_NAME }}
         
         # Kiểm tra trạng thái đăng nhập
         fab auth status
-    - name: Create a new workspace
-      run: |
-        fab mkdir "Minh-FabricCICD-TEST.Workspace" --capacityName ${{ secrets.FABRIC_CAPACITY_NAME }}
+    # - name: Create a new workspace
+    #   run: |
+    #     fab mkdir "Minh-FabricCICD-TEST.Workspace" --capacityName ${{ secrets.FABRIC_CAPACITY_NAME }}
 
           
     - name: Checkout repository
