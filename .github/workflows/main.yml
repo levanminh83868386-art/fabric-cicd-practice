@@ -41,13 +41,14 @@ jobs:
         else
           echo "Workspace '$WORKSPACE_NAME' does not exist. Creating it now..."
           fab mkdir "$WORKSPACE_NAME" -P capacityName=capacityvinhmai
-          
+
           # Grab and store the newly created workspace ID
           WORKSPACE_ID=$(fab get "$WORKSPACE_NAME" -q "id")
           echo "WORKSPACE_ID=$WORKSPACE_ID" >> $GITHUB_ENV
+
+          fab acl set '$WORKSPACE_NAME' -I 9242fe29-6d29-4961-a598-8e24d9ffbfb7 -R Admin -f
         fi
         
-        fab acl set Minh-FabricCICD-TEST.Workspace -I 9242fe29-6d29-4961-a598-8e24d9ffbfb7 -R Admin -f
         
         # fab mkdir "Minh-FabricCICD-TEST.Workspace" -P capacityName=capacityvinhmai
         
