@@ -49,11 +49,6 @@ jobs:
           fab acl set '$WORKSPACE_NAME' -I 9242fe29-6d29-4961-a598-8e24d9ffbfb7 -R Admin -f
         fi
         
-        
-        # fab mkdir "Minh-FabricCICD-TEST.Workspace" -P capacityName=capacityvinhmai
-        
-        # Kiểm tra trạng thái đăng nhập
-        fab auth status
     # - name: Create a new workspace
     #   run: |
     #     fab mkdir "Minh-FabricCICD-TEST.Workspace" --capacityName ${{ secrets.FABRIC_CAPACITY_NAME }}
