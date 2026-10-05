@@ -20,6 +20,7 @@ jobs:
         pip install ms-fabric-cli     
     - name: Authenticate Fabric CLI
       run: |
+        fab config set encryption_fallback_enabled true
         fab auth login \
           --user ${{ secrets.FABRIC_CLIENT_ID }} \
           --password ${{ secrets.FABRIC_CLIENT_SECRET }} \
