@@ -10,7 +10,46 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: List files
-        run: ls -la
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    - name: Install Fabric CLI
+      run: |
+        python -m pip install --upgrade pip
+        pip install ms-fabric-cli     
+    - name: Authenticate Fabric CLI
+      run: |
+        fab auth login \
+          --user ${{ secrets.FABRIC_CLIENT_ID }} \
+          --password ${{ secrets.FABRIC_CLIENT_SECRET }} \
+          --tenant ${{ secrets.FABRIC_TENANT_ID }}
+        
+        # Kiểm tra trạng thái đăng nhập
+        fab auth status
+    - name: Run Fabric Commands
+      run: |
+        fab ls
+        # Ví dụ chạy notebook hoặc sync workspace của bạn tại đây
+      # - name: Azure Login
+      #   uses: azure/login@v2
+      #   with:
+      #     client-id: ${{ secrets.FABRIC_CLIENT_ID }}
+      #     tennant-id: ${{ secrets.FABRIC_TENANT_ID }}
+      #     client-secret: ${{ secrets.FABRIC_CLIENT_SECRET }}
+      # - name: Get Fabric Access Token
+      #   id: fabirc-token
+      #   shell: bash
+      #   run: |
+      #     Token=$(az account get-access-token \
+      #       --resource https://api.fabric.microsoft.com \
+      #       --query accessToken \
+      #       -o tsv)
+
+      #     echo "token=$TOKEN" >> "$GITHUB_OUTPUT"
+
+          
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: List files
+      run: ls -la
