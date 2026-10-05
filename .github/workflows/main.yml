@@ -26,7 +26,7 @@ jobs:
           --password ${{ secrets.FABRIC_CLIENT_SECRET }} \
           --tenant ${{ secrets.FABRIC_TENANT_ID }}
 
-        fab acl set Minh-FabricCICD-TEST.Workspace -I 9242fe29-6d29-4961-a598-8e24d9ffbfb7 -R Admin
+        fab acl set Minh-FabricCICD-TEST.Workspace -I 9242fe29-6d29-4961-a598-8e24d9ffbfb7 -R Admin -f
         
         # fab mkdir "Minh-FabricCICD-TEST.Workspace" -P capacityName=capacityvinhmai
         
