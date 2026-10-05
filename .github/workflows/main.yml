@@ -19,6 +19,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install ms-fabric-cli     
     - name: Authenticate Fabric CLI
+      env:
+        WORKSPACE_NAME: "Minh-FabricCICD-TEST.Workspace"
       run: |
         fab config set encryption_fallback_enabled true
         fab auth login \
@@ -26,6 +28,25 @@ jobs:
           --password ${{ secrets.FABRIC_CLIENT_SECRET }} \
           --tenant ${{ secrets.FABRIC_TENANT_ID }}
 
+        echo "Checking if workspace '$WORKSPACE_NAME' exists..."
+          
+        # Use 'fab get' to check existence. We suppress standard error output (2>/dev/null) 
+        # so the logs look clean if it doesn't exist yet.
+        if fab get "$WORKSPACE_NAME" -q "id" >/dev/null 2>&1; then
+          echo "Workspace '$WORKSPACE_NAME' already exists."
+          
+          # Optional: Grab and store the existing workspace ID
+          WORKSPACE_ID=$(fab get "$WORKSPACE_NAME" -q "id")
+          echo "WORKSPACE_ID=$WORKSPACE_ID" >> $GITHUB_ENV
+        else
+          echo "Workspace '$WORKSPACE_NAME' does not exist. Creating it now..."
+          fab mkdir "$WORKSPACE_NAME" -P capacityName=capacityvinhmai
+          
+          # Grab and store the newly created workspace ID
+          WORKSPACE_ID=$(fab get "$WORKSPACE_NAME" -q "id")
+          echo "WORKSPACE_ID=$WORKSPACE_ID" >> $GITHUB_ENV
+        fi
+        
         fab acl set Minh-FabricCICD-TEST.Workspace -I 9242fe29-6d29-4961-a598-8e24d9ffbfb7 -R Admin -f
         
         # fab mkdir "Minh-FabricCICD-TEST.Workspace" -P capacityName=capacityvinhmai
