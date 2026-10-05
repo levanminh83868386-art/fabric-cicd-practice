@@ -30,7 +30,7 @@ jobs:
         fab auth status
     - name: Create a new workspace
       run: |
-        fab Create "Minh-FabricCICD-TEST.Workspace" --capacityName ${{ secrets.FABRIC_CAPACITY_NAME }}
+        fab mkdir "Minh-FabricCICD-TEST.Workspace" --capacityName ${{ secrets.FABRIC_CAPACITY_NAME }}
 
           
     - name: Checkout repository
