@@ -28,26 +28,9 @@ jobs:
         
         # Kiểm tra trạng thái đăng nhập
         fab auth status
-    - name: Run Fabric Commands
+    - name: Create a new workspace
       run: |
-        fab ls
-        # Ví dụ chạy notebook hoặc sync workspace của bạn tại đây
-      # - name: Azure Login
-      #   uses: azure/login@v2
-      #   with:
-      #     client-id: ${{ secrets.FABRIC_CLIENT_ID }}
-      #     tennant-id: ${{ secrets.FABRIC_TENANT_ID }}
-      #     client-secret: ${{ secrets.FABRIC_CLIENT_SECRET }}
-      # - name: Get Fabric Access Token
-      #   id: fabirc-token
-      #   shell: bash
-      #   run: |
-      #     Token=$(az account get-access-token \
-      #       --resource https://api.fabric.microsoft.com \
-      #       --query accessToken \
-      #       -o tsv)
-
-      #     echo "token=$TOKEN" >> "$GITHUB_OUTPUT"
+        fab Create "Minh-FabricCICD-TEST.Workspace" --capacityName ${{ secrets.FABRIC_CAPACITY_NAME }}
 
           
     - name: Checkout repository
