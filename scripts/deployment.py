@@ -19,7 +19,7 @@ target_workspace = FabricWorkspace(
     repository_directory="./workspace",
     item_type_in_scope=["Notebook","DataPipeline"],
     token_credential=token_credential,
-    environment="TEST"
+    environment="PROD"
 )
 
 
