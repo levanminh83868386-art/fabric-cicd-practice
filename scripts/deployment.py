@@ -14,15 +14,17 @@ tenant_id = os.environ["TENANT_ID"]
 token_credential = ClientSecretCredential(client_id=client_id, client_secret=client_secret, tenant_id=tenant_id)
 
 print(f"Deploying artifacts to workspace '{os.environ['WORKSPACE_ID']}'...")
-# target_workspace = FabricWorkspace(
-#     workspace_id=f"{os.environ['WORKSPACE_ID']}",
-#     repository_directory="./workspace",
-#     item_type_in_scope=["Notebook", "Pipeline", "Dataset", "Model", "Deployment"],
-#     token_credential=token_credential
+target_workspace = FabricWorkspace(
+    workspace_id=os.environ['WORKSPACE_ID'].strip(),
+    repository_directory="./workspace",
+    item_type_in_scope=["Notebook", "Pipeline", "Dataset", "Model", "Deployment"],
+    token_credential=token_credential
 
-# )
+)
 
 
-# publish_all_items(target_workspace)
+publish_all_items(target_workspace)
 
-# unpublish_all_orphan_items(target_workspace)
+unpublish_all_orphan_items(target_workspace)
+
+print(f"Deployment completed successfully to workspace '{os.environ['WORKSPACE_ID']}'")
