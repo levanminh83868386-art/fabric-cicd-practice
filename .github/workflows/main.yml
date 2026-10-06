@@ -14,10 +14,11 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.11'
-    - name: Install Fabric CLI
+    - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install ms-fabric-cli     
+        pip install ms-fabric-cli    
+        pip install fabric-cicd 
     - name: Authenticate Fabric CLI
       run: |
         fab config set encryption_fallback_enabled true
@@ -27,6 +28,7 @@ jobs:
           --tenant ${{ secrets.FABRIC_TENANT_ID }}
         
     - name: Create new Workspace
+      id: create_ws
       env:
         WORKSPACE_NAME: "Minh-FabricCICD-TEST.Workspace"
         CAPACITY_NAME: ${{ secrets.FABRIC_CAPACITY_NAME }}
@@ -52,9 +54,10 @@ jobs:
           
           fab acl set "$WORKSPACE_NAME" -I "$DEVELOPER_ID" -R Admin -f
         fi
-
+      
           
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    - name: List files
-      run: ls -la
+    - name: Deploy Fabric Artifacts
+      env:
+        WORKSPACE_ID: ${{ steps.create_ws.outputs.WORKSPACE_ID }}
+      run: |
+        echo "Workspace ID: $WORKSPACE_ID"
