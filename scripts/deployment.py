@@ -17,7 +17,7 @@ print(f"Deploying artifacts to workspace '{os.environ['WORKSPACE_ID']}'...")
 target_workspace = FabricWorkspace(
     workspace_id=os.environ['WORKSPACE_ID'].strip(),
     repository_directory="./workspace",
-    item_type_in_scope=["Notebook", "Pipeline", "Dataset", "Model", "Deployment"],
+    item_type_in_scope=["Notebook"],
     token_credential=token_credential
 
 )
