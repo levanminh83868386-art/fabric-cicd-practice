@@ -1,7 +1,6 @@
-find_replace:
+key_value_replace:
     - find_value: $.properties.activities[?(@.name=="Notebook1")].typeProperties.parameters.environment.value
       replace_value:
           TEST: "TEST"
-
       item_type: "DataPipeline" # filter on Data Pipelines files
-      item_name: "Pipeline_1" # filter on specific Data Pipelines files
+      item_name: "Pipeline_1" # filter on specific Data Pipelines files 
