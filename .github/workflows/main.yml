@@ -43,21 +43,19 @@ jobs:
           
           # Optional: Grab and store the existing workspace ID
           WORKSPACE_ID=$(fab get "$WORKSPACE_NAME" -q "id")
-          echo "workspace_id=$WORKSPACE_ID"
+          echo "WORKSPACE_ID=$WORKSPACE_ID" >> $GITHUB_ENV
         else
           echo "Workspace '$WORKSPACE_NAME' does not exist. Creating it now..."
           fab mkdir "$WORKSPACE_NAME" -P capacityName="$CAPACITY_NAME"
 
           # Grab and store the newly created workspace ID
           WORKSPACE_ID=$(fab get "$WORKSPACE_NAME" -q "id")
-          echo "workspace_id=$WORKSPACE_ID" >> $GITHUB_ENV
+          echo "WORKSPACE_ID=$WORKSPACE_ID" >> $GITHUB_ENV
           
           fab acl set "$WORKSPACE_NAME" -I "$DEVELOPER_ID" -R Admin -f
         fi
       
           
     - name: Deploy Fabric Artifacts
-      env:
-        WORKSPACE_ID: ${{ steps.create_ws.outputs.workspace_id }}
       run: |
         echo "Workspace ID: $WORKSPACE_ID"
