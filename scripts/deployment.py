@@ -18,8 +18,8 @@ target_workspace = FabricWorkspace(
     workspace_id=os.environ['WORKSPACE_ID'].strip(),
     repository_directory="./workspace",
     item_type_in_scope=["Notebook","DataPipeline"],
-    token_credential=token_credential
-
+    token_credential=token_credential,
+    environment="TEST"
 )
 
 
