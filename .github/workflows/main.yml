@@ -55,7 +55,9 @@ jobs:
           fab acl set "$WORKSPACE_NAME" -I "$DEVELOPER_ID" -R Admin -f
         fi
       
-          
+    - name: Checkout
+      uses: actions/checkout@v4
+            
     - name: Deploy Fabric Artifacts
       run: |
         python scripts/deployment.py
