@@ -43,7 +43,7 @@ jobs:
           
           # Optional: Grab and store the existing workspace ID
           WORKSPACE_ID=$(fab get "$WORKSPACE_NAME" -q "id")
-          echo "workspace_id=$WORKSPACE_ID" >> $GITHUB_ENV
+          echo "workspace_id=$WORKSPACE_ID"
         else
           echo "Workspace '$WORKSPACE_NAME' does not exist. Creating it now..."
           fab mkdir "$WORKSPACE_NAME" -P capacityName="$CAPACITY_NAME"
