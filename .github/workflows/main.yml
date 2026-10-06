@@ -58,6 +58,6 @@ jobs:
           
     - name: Deploy Fabric Artifacts
       env:
-        WORKSPACE_ID: ${{ steps.create_ws.outputs.WORKSPACE_ID }}
+        WORKSPACE_ID: ${{ steps.create_ws.outputs.workspace_id }}
       run: |
         echo "Workspace ID: $WORKSPACE_ID"
