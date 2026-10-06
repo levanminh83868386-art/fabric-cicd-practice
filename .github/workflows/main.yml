@@ -58,4 +58,4 @@ jobs:
           
     - name: Deploy Fabric Artifacts
       run: |
-        echo "Workspace ID: $WORKSPACE_ID"
+        python scripts/deployment.py
