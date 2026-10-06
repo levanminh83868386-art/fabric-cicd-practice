@@ -57,7 +57,10 @@ jobs:
       
     - name: Checkout
       uses: actions/checkout@v4
-            
+
     - name: Deploy Fabric Artifacts
       run: |
+        echo "CLIENT_ID=$FABRIC_CLIENT_ID" >> $GITHUB_ENV
+        echo "CLIENT_SECRET=$FABRIC_CLIENT_SECRET" >> $GITHUB_ENV
+        echo "TENANT_ID=$FABRIC_TENANT_ID" >> $GITHUB_ENV
         python scripts/deployment.py
